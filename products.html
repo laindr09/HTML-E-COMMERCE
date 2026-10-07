@@ -1,0 +1,208 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>ASTER</title>
+  <link rel="preconnect" href="https://googleapis.com">
+  <link rel="preconnect" href="https://gstatic.com" crossorigin>
+  <link href="https://googleapis.com" rel="stylesheet">
+  <style>
+       img.zoom-img {
+      transition: transform 0.3s ease; 
+      cursor: pointer;
+    }
+    
+      img.zoom-img:hover {
+      transform: scale(1.15); 
+    }
+
+    .product-label {
+      cursor: pointer;
+      transition: color 0.2s ease, transform 0.2s ease;
+      display: inline-block;
+    }
+
+    .product-label:hover {
+      color: #E6E6FA;
+      transform: scale(1.06);
+    }
+
+    /* Modal styles */
+    .modal-overlay {
+      display: none;
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: rgba(0,0,0,0.6);
+      z-index: 999;
+      justify-content: center;
+      align-items: center;
+      padding: 20px;
+      box-sizing: border-box;
+    }
+
+    .modal-overlay.active {
+      display: flex;
+    }
+
+    .modal-box {
+      background: linear-gradient(135deg,#F5EEE2,#EDE3F7);
+      border-radius: 16px;
+      max-width: 480px;
+      width: 100%;
+      max-height: 85vh;
+      overflow-y: auto;
+      padding: 28px;
+      box-sizing: border-box;
+      position: relative;
+      box-shadow: 0 10px 40px rgba(0,0,0,0.3);
+    }
+
+    .modal-close {
+      position: absolute;
+      top: 14px;
+      right: 18px;
+      font-size: 22px;
+      font-weight: 700;
+      color: #734F96;
+      cursor: pointer;
+      background: none;
+      border: none;
+      line-height: 1;
+    }
+
+    .modal-title {
+      color: #734F96;
+      font-weight: 700;
+      font-size: 20px;
+      margin: 0 0 12px 0;
+    }
+
+    .modal-section-title {
+      color: #734F96;
+      font-weight: 600;
+      font-size: 14px;
+      margin: 16px 0 6px 0;
+    }
+
+    .modal-text {
+      color: #4A3B57;
+      font-size: 13px;
+      line-height: 1.6;
+      margin: 0;
+    }
+
+    .modal-list {
+      color: #4A3B57;
+      font-size: 13px;
+      line-height: 1.7;
+      margin: 4px 0 0 0;
+      padding-left: 18px;
+    }
+  </style>
+</head>
+<body style="background: linear-gradient(135deg, #E6D7C3,#CBC3E3, #301934); min-height: 100vh; margin: 0; padding: 20px; background-attachment: fixed; font-family: 'Poppins', sans-serif;"> 
+   <div style="text-align:center; margin-bottom: 25px; padding-left: 5px;">
+    <img src="LOGONOBG.PNG" style="width: 220px; height: auto; display: block; margin: 0 auto;">
+  </div>
+    <div style="display: flex; flex-wrap: nowrap; gap: 10px;">
+     <div style="border: 2px solid #E6E6FA; border-radius: 12px; padding: 10px; width: 220px; flex-shrink: 0; overflow: hidden; text-align: center;">
+      <img src="aster package.jpg" class="zoom-img" style="width: 220px; height: auto; display: block; border-radius: 8px;">
+      <p class="product-label" onclick="openModal('glowset')" style="color: #FDF6E2; margin: 12px 0 2px 0; font-weight: 600; font-size: 14px; letter-spacing: 0.5px;">Glow Set</p>
+      <p style="color: #EDE3F7; margin: 2px 0 0 0; font-size: 13px; font-weight: 600;">₱2,499.00</p>
+<p><button>ADD TO CART</button> <p>
+       <div style="border: 2px solid #E6E6FA; border-radius: 12px; padding: 10px; width: 220px; flex-shrink: 0; overflow: hidden; text-align: center;">
+      <img src="8697fca0-0a86-4503-b3a6-ebba24df29a9.jpg" class="zoom-img" style="width: 220px; height: auto; display: block; border-radius: 8px;">
+      <p class="product-label" onclick="openModal('cleanser')" style="color: #FDF6E2; margin: 12px 0 2px 0; font-weight: 600; font-size: 14px; letter-spacing: 0.5px;">Foaming Cleanser</p>
+      <p style="color: #EDE3F7; margin: 2px 0 0 0; font-size: 13px; font-weight: 600;">₱380.00</p>
+    </div>
+        <div style="border: 2px solid #E6E6FA; border-radius: 12px; padding: 10px; width: 220px; flex-shrink: 0; overflow: hidden; text-align: center;">
+      <img src="2b148b50-b975-449b-b593-34c4dbb7c256.jpg" class="zoom-img" style="width: 220px; height: auto; display: block; border-radius: 8px;">
+      <p class="product-label" onclick="openModal('serum')" style="color: #FDF6E2; margin: 12px 0 2px 0; font-weight: 600; font-size: 14px; letter-spacing: 0.5px;">Serum</p>
+      <p style="color: #EDE3F7; margin: 2px 0 0 0; font-size: 13px; font-weight: 600;">₱450.00</p>
+    </div>
+        <div style="border: 2px solid #E6E6FA; border-radius: 12px; padding: 10px; width: 220px; flex-shrink: 0; overflow: hidden; text-align: center;">
+      <img src="91df123f-ad20-4b17-a6c9-d94497577a13.jpg" class="zoom-img" style="width: 220px; height: auto; display: block; border-radius: 8px;">
+      <p class="product-label" onclick="openModal('moisturizer')" style="color: #FDF6E2; margin: 12px 0 2px 0; font-weight: 600; font-size: 14px; letter-spacing: 0.5px;">Gel moisturizer</p>
+      <p style="color: #EDE3F7; margin: 2px 0 0 0; font-size: 13px; font-weight: 600;">₱420.00</p>
+    </div>
+  </div>
+
+  <!-- Modal -->
+  <div class="modal-overlay" id="modalOverlay" onclick="closeModalOnOverlay(event)">
+    <div class="modal-box" id="modalBox">
+      <button class="modal-close" onclick="closeModal()">&times;</button>
+      <div id="modalContent"></div>
+    </div>
+  </div>
+
+  <script>
+    const productData = {
+      glowset: {
+        title: "Aster Complete Glow Set",
+        price: "₱2,000.00",
+        description: "Discover your glowing skin with the full Aster ritual — a clean, luxury skincare collection designed to nurture skin from cleanse to glow. This complete set brings together everything you need for a complete routine: a gentle foaming cleanser, targeted serums, a lightweight gel moisturizer, nourishing eye cream, a tinted lip treat, and a cooling gua sha tool, all housed in soft lavender-and-cream packaging finished with a satin ribbon — perfect for gifting or treating yourself.",
+        tagline: "Glow. Nurture. Bloom.",
+        included: ["Foaming Cleanser", "Serum (pump bottle)", "Serum (tube)", "Serum (dropper)", "Gel Moisturizer (two sizes)", "Eye Cream", "Lip Treatment", "Gua Sha Tool", "Cleansing Sponge"],
+        bestTime: "A full AM and PM routine — cleanse, treat, and hydrate morning and night, with the gua sha as a weekly (or as-needed) ritual for extra glow.",
+        steps: [
+          "Cleanse with the Foaming Cleanser (or Cleansing Sponge) to prep skin.",
+          "Apply Serum to target specific concerns.",
+          "Follow with Eye Cream around the delicate eye area.",
+          "Seal in hydration with Gel Moisturizer.",
+          "Finish with Lip Treatment for soft, hydrated lips.",
+          "Use the Gua Sha Tool a few times a week to massage product in and boost circulation."
+        ]
+      },
+      cleanser: {
+        title: "Aster Foaming Cleanser",
+        price: "₱380.00",
+        description: "A gentle, clean-formulated cleanser that transforms into a soft, airy foam to lift away dirt, oil, and impurities without stripping the skin. Leaves skin feeling fresh, soft, and comfortably clean — never tight or dry.",
+        bestTime: "Morning and night — twice daily.",
+        bestTimeDetail: ["AM: To remove overnight buildup and refresh skin before your routine.", "PM: To remove makeup, sunscreen, and daily impurities before bed (double cleanse first if wearing heavy makeup/SPF)."],
+        steps: [
+          "Wet face with lukewarm water.",
+          "Pump a small amount (about a pea to dime size) onto palms.",
+          "Massage into skin in gentle, circular motions to work up a foam.",
+          "Focus on T-zone and areas prone to oil/buildup.",
+          "Rinse thoroughly with lukewarm water and pat dry.",
+          "Follow with toner, serum, and moisturizer."
+        ]
+      },
+      serum: {
+        title: "Aster Serum",
+        price: "₱450.00",
+        description: "A concentrated treatment that targets skin concerns at the source, delivering active ingredients deep into the skin for visible results. Lightweight and fast-absorbing, it works to hydrate, brighten, and strengthen the skin barrier — leaving it clearer, smoother, and more radiant with consistent use.",
+        bestTime: "Morning and night, depending on the active ingredient.",
+        bestTimeDetail: ["AM: Best for antioxidant serums (like vitamin C) — protects skin through the day. Always follow with sunscreen.", "PM: Best for repair-focused actives (like retinol or niacinamide) — works while skin regenerates overnight."],
+        steps: [
+          "Cleanse and tone skin first.",
+          "Take 2–3 drops of serum.",
+          "Gently press and pat into face and neck — avoid rubbing.",
+          "Let it fully absorb (about 1–2 minutes).",
+          "Follow with moisturizer to lock it in."
+        ]
+      },
+      moisturizer: {
+        title: "Aster Gel Moisturizer",
+        price: "₱420.00",
+        description: "An ultra-lightweight, refreshing water-gel moisturizer that drenches skin in lasting hydration without a greasy residue. Perfect for balancing moisture levels, soothing irritation, and leaving skin with a supple, plump, and healthy finish.",
+        bestTime: "Morning and night as the final hydrating step.",
+        bestTimeDetail: ["AM: Creates a smooth, hydrated base for sunscreen and makeup.", "PM: Restores and locks in moisture levels while you sleep."],
+        steps: [
+          "Apply onto clean, dry skin after serums.",
+          "Smooth a dime-sized amount over face and neck.",
+          "Gently massage using upward and outward motions until absorbed."
+        ]
+      }
+    };
+
+    function openModal(productId) {
+      const product = productData[productId];
+      if (!product) return;
+
+      let contentHtml = `<h2 class="modal-title">${product.title}</h2>`;
+      contentHtml += `<p class="modal-text" style="font-weight: 700; font-size: 16px; color: #734F96; margin-bottom: 10px;">${product.price}</p>`;
+      
+      if (product.tagline) {
