@@ -1,0 +1,243 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>ASTER - Discover your Glowing Skin</title>
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400..900;1,400..900&family=Poppins:wght@300;400;500;600&display=swap" rel="stylesheet">
+
+  <style>
+    * {
+      box-sizing: border-box;
+    }
+
+    body {
+      background-image: url("ABOUT US.JPG");
+      background-size: cover;
+      background-position: center center;
+      background-repeat: no-repeat;
+      background-attachment: fixed;
+      min-height: 100vh;
+      margin: 0;
+      padding: 40px 20px;
+      font-family: 'Poppins', sans-serif;
+      color: #ffffff;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      -webkit-font-smoothing: antialiased;
+    }
+
+    .container {
+      max-width: 800px;
+      width: 100%;
+    }
+
+    .hero-photo {
+      position: relative;
+      width: 100%;
+      height: 340px;
+      border-radius: 16px;
+      overflow: hidden;
+      margin-bottom: 40px;
+      box-shadow: 0 20px 40px rgba(0, 0, 0, 0.15);
+      border: 1px solid rgba(255, 255, 255, 0.15);
+    }
+
+    .hero-photo img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      display: block;
+    }
+
+    .hero-photo::after {
+      content: "";
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(to bottom, rgba(0,0,0,0) 50%, rgba(115,79,150,0.55) 100%);
+    }
+
+    nav {
+      display: flex;
+      justify-content: center;
+      gap: 40px;
+      margin-bottom: 40px;
+      border-bottom: 1px solid rgba(255, 255, 255, 0.2);
+      padding-bottom: 15px;
+    }
+
+    nav a {
+      text-decoration: none;
+      color: #ffffff;
+      font-weight: 400;
+      font-size: 14px;
+      letter-spacing: 2px;
+      text-transform: uppercase;
+      transition: opacity 0.3s ease;
+      opacity: 0.8;
+    }
+
+    nav a:hover {
+      opacity: 1;
+    }
+
+    marquee {
+      background-color: rgba(255, 255, 255, 0.06);
+      padding: 12px;
+      font-weight: 300;
+      font-size: 13px;
+      letter-spacing: 1.5px;
+      text-transform: uppercase;
+      margin-bottom: 50px;
+      border-radius: 50px;
+      border: 1px solid rgba(255, 255, 255, 0.1);
+      backdrop-filter: blur(10px);
+      -webkit-backdrop-filter: blur(10px);
+    }
+
+    h1 {
+      font-family: 'Playfair Display', serif;
+      font-size: 42px;
+      font-weight: 400;
+      letter-spacing: 4px;
+      text-align: center;
+      margin-top: 0;
+      margin-bottom: 40px;
+      color: #ffffff;
+    }
+
+    h2 {
+      font-family: 'Playfair Display', serif;
+      font-size: 28px;
+      font-weight: 400;
+      letter-spacing: 2px;
+      margin-top: 0;
+      margin-bottom: 25px;
+      border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+      padding-bottom: 10px;
+    }
+
+    .content-text {
+      font-size: 15px;
+      line-height: 1.8;
+      font-weight: 300;
+      margin-bottom: 25px;
+      text-align: justify;
+      opacity: 0.95;
+    }
+
+       .section-card {
+      background: rgba(255, 255, 255, 0.07);
+      padding: 40px;
+      border-radius: 16px;
+      backdrop-filter: blur(20px);
+      -webkit-backdrop-filter: blur(20px);
+      border: 1px solid rgba(255, 255, 255, 0.15);
+      box-shadow: 0 20px 40px rgba(0, 0, 0, 0.15);
+      margin-bottom: 40px;
+    }
+
+       .product-cta {
+      text-align: center;
+      margin: 40px 0 10px 0;
+    }
+
+    .product-cta a {
+      display: inline-block;
+      padding: 12px 35px;
+      border: 1px solid #ffffff;
+      color: #ffffff;
+      text-decoration: none;
+      font-size: 13px;
+      letter-spacing: 2px;
+      text-transform: uppercase;
+      border-radius: 50px;
+      transition: all 0.3s ease;
+      background: transparent;
+    }
+
+    .product-cta a:hover {
+      background: #ffffff;
+      color: #734F96;
+      box-shadow: 0 8px 20px rgba(0, 0, 0, 0.1);
+    }
+
+    
+    .contact-list {
+      list-style: none;
+      padding: 0;
+      margin: 0;
+    }
+
+    .contact-list li {
+      font-size: 14px;
+      font-weight: 300;
+      margin-bottom: 15px;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+
+    .contact-list a {
+      color: #E6D7C3;
+      text-decoration: none;
+      font-weight: 400;
+      transition: color 0.3s ease;
+    }
+
+    .contact-list a:hover {
+      color: #ffffff;
+      text-decoration: underline;
+    }
+  </style>
+</head>
+<body>
+
+<div class="container">
+
+  <nav>
+    <a href="#home">Home</a>
+    <a href="aster.html">Products</a>
+    <a href="#contact">Contact Us</a>
+  </nav>
+
+  <marquee behavior="scroll" direction="left" scrollamount="4">DISCOVER YOUR GLOWING SKIN</marquee>
+  <!-- Main Showcase Container (About Us) -->
+  <div id="home" class="section-card">
+    <h1>ABOUT US</h1>
+
+    <p class="content-text">
+      Aster began the way most honest things do — with a problem no one else seemed to be solving properly. Years of struggling with acne and sensitive skin meant years of trial and error: harsh actives that promised results and delivered irritation, "gentle" formulas that did nothing at all, and a skincare industry that seemed to force a choice between efficacy and comfort. It felt like no one had built something that respected both the skin and the person in it. So we built it ourselves.
+    </p>
+
+    <p class="content-text">
+      Aster is what we wished existed — skincare formulated with the same care you'd want from a dermatologist, and the same restraint you'd want from someone who actually understands what compromised skin needs. Every formula is built around a simple standard: real, visible results, without the redness, the stinging, or the guesswork.
+    </p>
+
+    <p class="content-text">
+      This isn't a brand built by an outsider looking in. It's built by someone who has stood in front of the mirror, frustrated, and decided to make something better — not just for ourselves, but for everyone who has ever felt like their skin was working against them.
+    </p>
+
+    <div class="product-cta">
+      <a href="aster.html">Explore Our Products</a>
+    </div>
+  </div>
+
+
+  <div id="contact" class="section-card">
+    <h2>Contact Us</h2>
+    <ul class="contact-list">
+      <li>Facebook Page: <a href="https://facebook.com" target="_blank" rel="noopener">aster skin</a></li>
+      <li>Instagram: <a href="https://instagram.com" target="_blank" rel="noopener">@aster.skincare</a></li>
+      <li>Gmail Support: <a href="mailto:asterskin@gmail.com">asterskin@gmail.com</a></li>
+    </ul>
+  </div>
+
+</div>
+
+</body>
+</html>

@@ -1,0 +1,171 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>ASTER</title>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&display=swap" rel="stylesheet">
+  <style>
+    body { background: linear-gradient(135deg,#E6D7C3,#CBC3E3,#301934); min-height:100vh; margin:0; padding:20px; background-attachment:fixed; font-family:'Poppins',sans-serif; }
+    .logo { text-align:center; margin-bottom:25px; }
+    .logo img { width:220px; height:auto; }
+
+
+    .products { display:flex; flex-wrap:wrap; gap:16px; justify-content:center; }
+    .card { border:2px solid #E6E6FA; border-radius:12px; padding:10px; width:220px; text-align:center; overflow:hidden; }
+    .card img { width:220px; height:auto; display:block; border-radius:8px; transition:transform .3s ease; cursor:pointer; }
+    .card img:hover { transform:scale(1.15); }
+    .name { color:#FDF6E2; margin:12px 0 2px; font-weight:600; font-size:14px; cursor:pointer; display:inline-block; transition:color .2s, transform .2s; }
+    .name:hover { color:#E6E6FA; transform:scale(1.06); }
+    .price { color:#EDE3F7; margin:2px 0 10px; font-size:13px; font-weight:600; }
+    .cart-btn { background:#734F96; color:#fff; border:none; border-radius:20px; padding:8px 18px; font-family:inherit; font-size:12px; font-weight:600; cursor:pointer; }
+    .cart-btn:hover { background:#5d3f7a; }
+
+  
+    .overlay { display:none; position:fixed; inset:0; background:rgba(0,0,0,.6); z-index:999; justify-content:center; align-items:center; padding:20px; box-sizing:border-box; }
+    .overlay.active { display:flex; }
+    .box { background:linear-gradient(135deg,#F5EEE2,#EDE3F7); border-radius:16px; max-width:480px; width:100%; max-height:85vh; overflow-y:auto; padding:28px; box-sizing:border-box; position:relative; box-shadow:0 10px 40px rgba(0,0,0,.3); color:#4A3B57; font-size:13px; line-height:1.6; }
+    .close { position:absolute; top:14px; right:18px; font-size:22px; font-weight:700; color:#734F96; cursor:pointer; background:none; border:none; }
+    h2 { color:#734F96; font-size:20px; margin:0 0 10px; }
+    h4 { color:#734F96; font-size:14px; margin:16px 0 6px; }
+    ul, ol { margin:4px 0 0; padding-left:18px; }
+
+ 
+    .slip-row { display:flex; justify-content:space-between; padding:8px 0; border-bottom:1px dashed #734F96; }
+    .qty button { width:26px; height:26px; border-radius:50%; border:1px solid #734F96; background:none; color:#734F96; cursor:pointer; font-weight:700; }
+    .qty span { display:inline-block; width:28px; text-align:center; }
+    .total { font-weight:700; font-size:16px; color:#734F96; }
+    .buy-btn { width:100%; margin-top:18px; background:#734F96; color:#fff; border:none; border-radius:24px; padding:12px; font-family:inherit; font-size:14px; font-weight:700; cursor:pointer; }
+    .buy-btn:hover { background:#5d3f7a; }
+  </style>
+</head>
+<body>
+
+  <div class="logo"><img src="LOGONOBG.PNG" alt="ASTER"></div>
+
+  <div class="products">
+    <div class="card">
+      <img src="aster package.jpg" onclick="openInfo('glowset')">
+      <span class="name" onclick="openInfo('glowset')">Glow Set</span>
+      <p class="price">₱2,499.00</p>
+      <button class="cart-btn" onclick="addToCart('glowset')">ADD TO CART</button>
+    </div>
+
+    <div class="card">
+      <img src="8697fca0-0a86-4503-b3a6-ebba24df29a9.jpg" onclick="openInfo('cleanser')">
+      <span class="name" onclick="openInfo('cleanser')">Foaming Cleanser</span>
+      <p class="price">₱380.00</p>
+      <button class="cart-btn" onclick="addToCart('cleanser')">ADD TO CART</button>
+    </div>
+
+    <div class="card">
+      <img src="2b148b50-b975-449b-b593-34c4dbb7c256.jpg" onclick="openInfo('serum')">
+      <span class="name" onclick="openInfo('serum')">Serum</span>
+      <p class="price">₱450.00</p>
+      <button class="cart-btn" onclick="addToCart('serum')">ADD TO CART</button>
+    </div>
+
+    <div class="card">
+      <img src="91df123f-ad20-4b17-a6c9-d94497577a13.jpg" onclick="openInfo('moisturizer')">
+      <span class="name" onclick="openInfo('moisturizer')">Gel Moisturizer</span>
+      <p class="price">₱420.00</p>
+      <button class="cart-btn" onclick="addToCart('moisturizer')">ADD TO CART</button>
+    </div>
+  </div>
+
+  <div class="overlay" id="infoOverlay" onclick="if(event.target===this)closeAll()">
+    <div class="box">
+      <button class="close" onclick="closeAll()">&times;</button>
+      <div id="infoContent"></div>
+    </div>
+  </div>
+
+  <div class="overlay" id="slipOverlay" onclick="if(event.target===this)closeAll()">
+    <div class="box">
+      <button class="close" onclick="closeAll()">&times;</button>
+      <div id="slipContent"></div>
+    </div>
+  </div>
+
+  <script>
+    const products = {
+      glowset: {
+        title: "Aster Complete Glow Set", price: 2499,
+        description: "The full Aster ritual: a clean, luxury skincare collection for your whole routine, in lavender-and-cream packaging with a satin ribbon. Perfect for gifting or treating yourself.",
+        included: ["Foaming Cleanser", "Serum (pump bottle)", "Serum (tube)", "Serum (dropper)", "Gel Moisturizer (two sizes)", "Eye Cream", "Lip Treatment", "Gua Sha Tool", "Cleansing Sponge"],
+        bestTime: "Morning and night.",
+        steps: ["Cleanse with the Foaming Cleanser.", "Apply Serum.", "Follow with Eye Cream.", "Seal in with Gel Moisturizer.", "Finish with Lip Treatment.", "Use the Gua Sha a few times a week."]
+      },
+      cleanser: {
+        title: "Aster Foaming Cleanser", price: 380,
+        description: "A gentle cleanser that turns into a soft, airy foam to lift away dirt and oil without stripping the skin.",
+        bestTime: "Morning and night.",
+        steps: ["Wet face with lukewarm water.", "Pump a small amount onto palms.", "Massage in circles to foam.", "Rinse and pat dry."]
+      },
+      serum: {
+        title: "Aster Serum", price: 450,
+        description: "A lightweight, fast-absorbing treatment that hydrates, brightens, and strengthens the skin barrier.",
+        bestTime: "Morning and night.",
+        steps: ["Cleanse first.", "Take 2–3 drops.", "Pat gently into face and neck.", "Follow with moisturizer."]
+      },
+      moisturizer: {
+        title: "Aster Gel Moisturizer", price: 420,
+        description: "An ultra-lightweight water-gel moisturizer for lasting hydration without the greasy feel.",
+        bestTime: "Morning and night, as the last step.",
+        steps: ["Apply on clean skin after serum.", "Smooth a dime-sized amount over face and neck.", "Massage upward until absorbed."]
+      }
+    };
+
+    const peso = n => "₱" + n.toLocaleString("en-PH", {minimumFractionDigits: 2});
+    let current = null, qty = 1;
+
+    function closeAll() {
+      document.getElementById("infoOverlay").classList.remove("active");
+      document.getElementById("slipOverlay").classList.remove("active");
+    }
+
+    // Product info popup
+    function openInfo(id) {
+      const p = products[id];
+      let html = `<h2>${p.title}</h2><p style="font-weight:700;font-size:16px;color:#734F96">${peso(p.price)}</p><p>${p.description}</p>`;
+      if (p.included) html += `<h4>What's included</h4><ul>${p.included.map(i => `<li>${i}</li>`).join("")}</ul>`;
+      html += `<h4>Best time to use</h4><p>${p.bestTime}</p>`;
+      html += `<h4>How to use</h4><ol>${p.steps.map(s => `<li>${s}</li>`).join("")}</ol>`;
+      html += `<button class="buy-btn" onclick="addToCart('${id}')">ADD TO CART</button>`;
+      document.getElementById("infoContent").innerHTML = html;
+      document.getElementById("infoOverlay").classList.add("active");
+    }
+
+    // Order slip
+    function addToCart(id) {
+      current = id; qty = 1;
+      document.getElementById("infoOverlay").classList.remove("active");
+      renderSlip();
+      document.getElementById("slipOverlay").classList.add("active");
+    }
+
+    function changeQty(n) {
+      qty = Math.max(1, qty + n);
+      renderSlip();
+    }
+
+    function renderSlip() {
+      const p = products[current];
+      document.getElementById("slipContent").innerHTML = `
+        <h2>Order Slip</h2>
+        <div class="slip-row"><span>${p.title}</span><span>${peso(p.price)}</span></div>
+        <div class="slip-row"><span>Quantity</span>
+          <span class="qty"><button onclick="changeQty(-1)">−</button><span>${qty}</span><button onclick="changeQty(1)">+</button></span>
+        </div>
+        <div class="slip-row total"><span>Total</span><span>${peso(p.price * qty)}</span></div>
+        <button class="buy-btn" onclick="buyNow()">BUY</button>`;
+    }
+
+    function buyNow() {
+      const p = products[current];
+      document.getElementById("slipContent").innerHTML = `
+        <h2>Thank you!</h2>
+        <p>Your order for ${qty} × ${p.title} (${peso(p.price * qty)}) has been placed.</p>
+        <p>Glow. Nurture. Bloom.</p>`;
+    }
+  </script>
+</body>
+</html>
